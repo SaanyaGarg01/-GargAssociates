@@ -1,280 +1,139 @@
-<div align="center">
+# Sudhir Garg and Namita Garg - Law Firm Website
 
-<br/>
+A modern, professional law firm website showcasing legal expertise with comprehensive features for client engagement and consultation booking.
 
-# ⚖️ Sudhir Garg & Namita Garg — Law Firm
+## Features
 
-### *Justice. Integrity. Results.*
+### Core Pages
+* **Home Page** - Hero section with CTAs, stats counter, practice areas preview, testimonials
+* **About Us** - Detailed lawyer profiles with qualifications, experience, and achievements
+* **Services** - Comprehensive practice area details with service breakdowns
+* **Case Studies** - Success stories with problem-strategy-outcome format
+* **Blog** - Legal articles and updates
+* **Contact** - Appointment booking, contact form, FAQ section, office location
 
-<br/>
+### Interactive Features
+* **WhatsApp Integration** - Direct chat button for instant communication
+* **AI Chatbot** - Interactive assistant for common legal questions
+* **Multi-language Support** - English and Hindi language options
+* **Appointment Booking** - Easy-to-use scheduling system
+* **Document Upload** - Secure client document submission (future enhancement)
+* **Responsive Design** - Optimized for all devices (mobile, tablet, desktop)
 
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-R3F-black?style=for-the-badge&logo=three.js&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer-Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+## Technical Stack
+* **Frontend**: React 18 + TypeScript + Vite
+* **Styling**: Tailwind CSS
+* **Icons**: Lucide React
+* **Database**: Supabase (PostgreSQL)
+* **Features**: Row Level Security (RLS), Real-time data
 
-<br/>
-
-> A **cinematic, ultra-modern 3D law firm website** built with React Three Fiber, Framer Motion, GSAP, and Lenis — designed to look and feel like an Awwwards-winning premium legal platform.
-
-<br/>
-
----
-
-</div>
-
-## ✨ Features
-
-### 🎨 Design & Visuals
-- **Dark Luxury Aesthetic** — Navy blue, matte black, deep slate with gold/amber highlights
-- **Glassmorphism UI** — Frosted-glass cards, navbar, and modals with `backdrop-filter: blur`
-- **Custom Gold Cursor** — Animated dot + trailing ring cursor (desktop)
-- **Gradient Orbs & Light Beams** — Cinematic depth and atmosphere throughout
-- **Premium Typography** — Playfair Display (serif) + Inter (sans-serif)
-
-### 🌐 3D & Animation
-- **Golden Scales of Justice** — Interactive Three.js 3D model with mouse-reactive rotation and floating animation
-- **GPU Particle Field** — 3,000 gold particles with real-time mouse parallax
-- **3D Tilt Cards** — Real-time perspective tilt on service cards based on mouse position
-- **3D Flip Cards** — Lawyer profile cards that flip to reveal full bio and credentials
-- **Lenis Smooth Scrolling** — Buttery-smooth scroll with custom easing
-- **Framer Motion Transitions** — Cinematic `AnimatePresence` page transitions
-- **Scroll-triggered reveals** — Every section animates in on scroll
-
-### 🤖 AI & Interactive
-- **AI Legal Chatbot** — Floating widget with keyword-smart responses, typing indicator, and quick replies
-- **WhatsApp Button** — Floating button with pulse animation for instant client contact
-- **Stat Counters** — Smooth count-up animation (2,500+ Cases Won, 96% Success Rate, etc.)
-- **Testimonials Carousel** — Directional slide with client reviews
-- **FAQ Accordion** — Smooth expand/collapse with animated height transitions
-- **Interactive Calendar UI** — Day + time slot selection on the Contact page
-- **Reading Progress Bar** — Live indicator on Blog page
-
-### 📄 Pages (6 Full Pages)
-| Page | Key Features |
-|---|---|
-| **Home** | 3D Hero, Stats, 8 Service Cards (3D tilt), Why Choose Us, Testimonials, Timeline, CTA |
-| **About** | Flipping 3D Lawyer Cards, Awards, Achievements, Full Timeline |
-| **Services** | Expandable Accordion Cards for 8 Practice Areas |
-| **Case Studies** | Cinematic Problem → Strategy → Result storytelling layout |
-| **Blog** | Editorial layout, Featured Hero, Category Filters, Reading Progress |
-| **Contact** | Booking Form, Calendar UI, Google Maps, FAQ, **English/Hindi language switch** |
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Technology |
-|---|---|
-| **Framework** | React 18 + TypeScript |
-| **Build Tool** | Vite 5 |
-| **Styling** | Tailwind CSS v3 + Custom CSS |
-| **3D Engine** | React Three Fiber + Drei + Three.js |
-| **Animation** | Framer Motion + GSAP |
-| **Smooth Scroll** | Lenis |
-| **Icons** | Lucide React |
-| **Routing** | React Router v6 |
-| **Fonts** | Playfair Display + Inter (Google Fonts) |
-
----
-
-## 🚀 Getting Started
+## Setup Instructions
 
 ### Prerequisites
-
-- **Node.js** v20.19+ or v22.12+ (required by Vite 5)
-- **npm** v9+
+* Node.js 18+ and npm
+* Supabase account (for database)
 
 ### Installation
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/your-username/garg-associates.git
-cd garg-associates
+2. **Set up environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-# 2. Install dependencies
-npm install
+3. **Database Setup**
+   * The database migrations are already applied via Supabase MCP
+   * Sample data (lawyers, practice areas, testimonials, blog posts, FAQs) is pre-populated
 
-# 3. Start the development server
-npm run dev
-```
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-The app will be available at **http://localhost:5173**
+5. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-### Build for Production
+## Database Schema
 
-```bash
-npm run build
-```
+### Tables
+* **lawyers** - Lawyer profiles and credentials
+* **practice_areas** - Legal service categories
+* **testimonials** - Client reviews
+* **case_studies** - Success stories
+* **blog_posts** - Legal articles
+* **appointments** - Consultation bookings
+* **faqs** - Frequently asked questions
+* **contact_messages** - General inquiries
+* **documents** - Client file uploads
 
-Output is in the `dist/` folder, ready for deployment on Vercel, Netlify, or any static host.
+## Customization
 
----
+### Update Lawyer Information
+Edit the sample data in the database through Supabase dashboard or add new entries.
 
-## 📁 Project Structure
+### Modify Practice Areas
+Add or edit practice areas through the database. Each area includes:
+* Title
+* Description
+* Icon reference
+* Display order
 
-```
-@GargAssociates/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── 3d/
-│   │   │   ├── ScalesScene.tsx       # 3D Golden Scales of Justice
-│   │   │   └── ParticleField.tsx     # GPU Particle System
-│   │   ├── ai/
-│   │   │   └── ChatWidget.tsx        # AI Legal Chatbot
-│   │   ├── layout/
-│   │   │   ├── Navbar.tsx            # Glassmorphism floating navbar
-│   │   │   ├── Footer.tsx            # Animated footer
-│   │   │   ├── CursorEffect.tsx      # Custom gold cursor
-│   │   │   └── LoadingScreen.tsx     # Animated intro screen
-│   │   ├── sections/
-│   │   │   ├── HeroSection.tsx       # Fullscreen 3D hero
-│   │   │   ├── StatsSection.tsx      # Animated counters
-│   │   │   ├── ServicesSection.tsx   # 8 practice area cards
-│   │   │   ├── WhyChooseUsSection.tsx
-│   │   │   ├── TestimonialsSection.tsx
-│   │   │   ├── TimelineSection.tsx
-│   │   │   └── CTASection.tsx
-│   │   └── ui/
-│   │       └── WhatsAppButton.tsx    # Floating WhatsApp CTA
-│   ├── data/
-│   │   └── index.ts                  # All static content
-│   ├── hooks/
-│   │   ├── useLenis.ts               # Smooth scroll hook
-│   │   ├── useMousePosition.ts       # Cursor tracking
-│   │   └── useScrollProgress.ts      # Reading progress
-│   ├── lib/
-│   │   └── utils.ts                  # Utility functions
-│   ├── pages/
-│   │   ├── Home.tsx
-│   │   ├── About.tsx
-│   │   ├── Services.tsx
-│   │   ├── CaseStudies.tsx
-│   │   ├── Blog.tsx
-│   │   └── Contact.tsx
-│   ├── App.tsx                       # Router + Layout wrapper
-│   ├── main.tsx                      # Entry point
-│   └── index.css                     # Global styles + design tokens
-├── tailwind.config.js
-├── postcss.config.js
-├── vite.config.ts
-└── tsconfig.json
-```
+### Add Blog Posts
+Create new blog posts through the database with:
+* Title and slug
+* Content (supports Markdown-style formatting)
+* Author reference
+* Category and tags
+* Featured image
 
----
+### Configure Contact Details
+Update phone numbers, email, and office address in:
+* `src/components/Navigation.tsx`
+* `src/components/Footer.tsx`
+* `src/components/WhatsAppButton.tsx`
+* `src/pages/ContactPage.tsx`
 
-## 🎨 Design System
+## Design Features
 
-### Color Palette
+### Color Scheme
+* **Primary**: Navy blue and slate tones (professional law firm aesthetic)
+* **Accent**: Amber/gold (trust and premium feel)
+* Professional gradient overlays
+* Clean, modern typography
 
-| Token | Hex | Usage |
-|---|---|---|
-| `navy-950` | `#05080f` | Page background |
-| `navy-900` | `#0a0f1e` | Section backgrounds |
-| `navy-800` | `#0d1530` | Card backgrounds |
-| `gold-500` | `#c9a84c` | Primary accent |
-| `gold-400` | `#e0b84a` | Hover states |
-| `gold-300` | `#f0cc6a` | Highlights |
-| `white` | `#f8f9fc` | Primary text |
-| `text-muted` | `#8892a4` | Secondary text |
+### Key Components
+* Sticky navigation with smooth scrolling
+* Animated stats counter
+* Interactive service cards
+* Testimonial carousel layout
+* FAQ accordion
+* Professional footer with social links
 
-### Typography
+## Security
+* Row Level Security (RLS) enabled on all database tables
+* Public read access for published content only
+* Form validation on client and server side
+* Secure document upload preparation
+* No sensitive data exposure
 
-```
-Headings:  Playfair Display — clamp(2rem, 5vw, 4.5rem)
-Body:      Inter — 0.875rem–1.05rem
-Display:   Cormorant Garamond — for decorative headings
-```
+## Future Enhancements
+* Payment gateway integration
+* Client portal with login
+* Case status tracking
+* Online consultation via video call
+* Advanced document management
+* Email notification system
+* SMS reminders for appointments
 
----
+## Support
+For technical support or customization requests, contact the development team.
 
-## ⚙️ Customization
-
-### Update Contact Details
-
-**WhatsApp number** → [`src/components/ui/WhatsAppButton.tsx`](src/components/ui/WhatsAppButton.tsx)
-```tsx
-const phone = '91XXXXXXXXXX'; // Replace with actual number
-```
-
-**Phone / Email / Address** → [`src/components/layout/Navbar.tsx`](src/components/layout/Navbar.tsx) and [`src/components/layout/Footer.tsx`](src/components/layout/Footer.tsx)
-
-**Google Maps location** → [`src/pages/Contact.tsx`](src/pages/Contact.tsx) — update the iframe `src` coordinates
-
-### Update Firm Content
-
-All text content, team bios, case studies, blog posts, FAQs, and services are in one place:
-
-```
-src/data/index.ts
-```
-
-Edit the exported arrays to change any content on the site.
-
----
-
-## 🚢 Deployment
-
-### Deploy to Vercel (Recommended)
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Deploy to Netlify
-
-```bash
-# Build
-npm run build
-
-# Drag-and-drop the dist/ folder to Netlify
-# Or connect your GitHub repo for auto-deploys
-```
-
-### Deploy to GitHub Pages
-
-```bash
-npm install --save-dev gh-pages
-
-# Add to package.json scripts:
-# "predeploy": "npm run build",
-# "deploy": "gh-pages -d dist"
-
-npm run deploy
-```
-
-> **Note:** For GitHub Pages, set `base: '/repo-name/'` in `vite.config.ts`.
-
----
-
-## 📜 Legal Disclaimer
-
-This website is a professional digital presence for an actual law firm. All case studies are presented with client permission. Confidential client identities have been anonymized where required by professional ethics and Bar Council guidelines.
-
----
-
-## 📄 License
-
-This project is proprietary software developed exclusively for **Sudhir Garg & Namita Garg — Law Firm**.
-
-Unauthorized copying, modification, or distribution of this code is prohibited.
-
-© 2026 Sudhir Garg & Namita Garg — Law Firm. All rights reserved.
-
----
-
-<div align="center">
-
-**Built with ❤️ for justice, integrity, and results.**
-
-*Designed to Awwwards standard · Powered by React Three Fiber · Animated by Framer Motion*
-
-</div>
+## License
+Private/Proprietary - All rights reserved.
