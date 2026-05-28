@@ -1,6 +1,6 @@
 # Sudhir Garg and Namita Garg - Law Firm Website
 
-A modern, professional law firm website showcasing legal expertise with comprehensive features for client engagement and consultation booking.
+A modern, professional law firm website for my parent's law practice showcasing legal expertise with comprehensive features for client engagement and consultation booking.
 
 ## Features
 
