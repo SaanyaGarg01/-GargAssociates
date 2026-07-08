@@ -1,15 +1,30 @@
-import { useRef, useEffect, Suspense, lazy } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect, useState, Suspense, lazy } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 
 const ScalesScene = lazy(() => import('../3d/ScalesScene'));
 const ParticleField = lazy(() => import('../3d/ParticleField'));
 
+const BACKGROUND_VIDEOS = [
+  'https://images.pexels.com/video-files/3760067/3760067-hd_1920_1080_24fps.mp4', // Lawyer writing, gavel and law books in background
+  'https://images.pexels.com/video-files/4490807/4490807-hd_1920_1080_24fps.mp4', // Close up of lawyer reviewing contract
+  'https://images.pexels.com/video-files/5607908/5607908-hd_1920_1080_24fps.mp4'  // Courtroom scales, gavel, and books
+];
+
 export default function HeroSection() {
+  const [videoIndex, setVideoIndex] = useState(0);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVideoIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_VIDEOS.length);
+    }, 10000); // Change video every 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -26,6 +41,27 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-bg">
+      {/* Background Videos with Cross-fade Transition */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <AnimatePresence initial={false}>
+          <motion.video
+            key={BACKGROUND_VIDEOS[videoIndex]}
+            src={BACKGROUND_VIDEOS[videoIndex]}
+            autoPlay
+            muted
+            loop
+            playsInline
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.18 }} // Subtle overlay so text reads perfectly
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
+        {/* Navy/Gold blend overlay gradients for rich contrast */}
+        <div className="absolute inset-0 bg-navy-950/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-transparent to-navy-950 opacity-90" />
+      </div>
       {/* Particle system */}
       <Suspense fallback={null}>
         <ParticleField />
