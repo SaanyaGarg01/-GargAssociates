@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import { testimonials } from '../../data';
+import VideoBackground from '../ui/VideoBackground';
 
 export default function TestimonialsSection() {
   const [active, setActive] = useState(0);
@@ -20,6 +21,11 @@ export default function TestimonialsSection() {
 
   return (
     <section className="section-padding relative overflow-hidden bg-navy-900">
+      <VideoBackground
+        localSrc="/videos/handshake.mp4"
+        fallbackSrc="https://images.pexels.com/video-files/3196238/3196238-uhd_3840_2160_25fps.mp4"
+        overlayOpacity={0.65}
+      />
       <div className="gold-divider absolute top-0 left-0 right-0" />
       <div className="gold-divider absolute bottom-0 left-0 right-0" />
 

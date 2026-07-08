@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronUp, Send, Calendar, Check, Globe } from 'lucide-react';
 import { faqs } from '../data';
+import VideoBackground from '../components/ui/VideoBackground';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const TIMES = ['10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
@@ -94,6 +95,11 @@ export default function Contact() {
     <main className="pt-24">
       {/* Hero */}
       <section className="section-padding relative overflow-hidden hero-bg">
+        <VideoBackground
+          localSrc="/videos/consultation.mp4"
+          fallbackSrc="https://images.pexels.com/video-files/4490813/4490813-hd_1920_1080_24fps.mp4"
+          overlayOpacity={0.65}
+        />
         <div className="orb orb-gold w-[400px] h-[400px] -top-20 right-10 opacity-15" />
         <div className="container-custom relative z-10">
           <div className="flex items-start justify-between flex-wrap gap-4 mb-12">

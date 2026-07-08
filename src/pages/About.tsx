@@ -4,6 +4,7 @@ import { Award, BookOpen, Scale, Star } from 'lucide-react';
 import { team, timeline, awards } from '../data';
 import TimelineSection from '../components/sections/TimelineSection';
 import CTASection from '../components/sections/CTASection';
+import VideoBackground from '../components/ui/VideoBackground';
 
 const ScalesScene = lazy(() => import('../components/3d/ScalesScene'));
 
@@ -121,6 +122,11 @@ export default function About() {
     <main className="pt-24">
       {/* Hero */}
       <section className="section-padding relative overflow-hidden hero-bg">
+        <VideoBackground
+          localSrc="/videos/office.mp4"
+          fallbackSrc="https://images.pexels.com/video-files/3760067/3760067-hd_1920_1080_24fps.mp4"
+          overlayOpacity={0.6}
+        />
         <div className="orb orb-gold w-[500px] h-[500px] -top-40 -right-20 opacity-20" />
         <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-16 items-center">
           <div>

@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion';
 import { whyChooseUs } from '../../data';
+import VideoBackground from '../ui/VideoBackground';
 
 export default function WhyChooseUsSection() {
   return (
     <section className="section-padding relative overflow-hidden bg-navy-900">
+      <VideoBackground
+        localSrc="/videos/strategy.mp4"
+        fallbackSrc="https://images.pexels.com/video-files/3196144/3196144-uhd_3840_2160_25fps.mp4"
+        overlayOpacity={0.65}
+      />
       <div className="gold-divider absolute top-0 left-0 right-0" />
       <div className="orb orb-gold w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10" />
 

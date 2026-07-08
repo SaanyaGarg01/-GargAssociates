@@ -91,9 +91,16 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   );
 }
 
+import VideoBackground from '../ui/VideoBackground';
+
 export default function ServicesSection() {
   return (
     <section className="section-padding relative overflow-hidden">
+      <VideoBackground
+        localSrc="/videos/library.mp4"
+        fallbackSrc="https://images.pexels.com/video-files/3760070/3760070-hd_1920_1080_24fps.mp4"
+        overlayOpacity={0.6}
+      />
       <div className="orb orb-gold w-[500px] h-[500px] top-20 -right-40 opacity-15" />
       <div className="orb orb-blue w-[400px] h-[400px] bottom-20 -left-40 opacity-10" />
 

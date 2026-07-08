@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import { services } from '../data';
 import CTASection from '../components/sections/CTASection';
 import { Link } from 'react-router-dom';
+import VideoBackground from '../components/ui/VideoBackground';
 
 function ServiceDetail({ service, index }: { service: typeof services[0]; index: number }) {
   const [open, setOpen] = useState(false);
@@ -95,6 +96,11 @@ export default function Services() {
     <main className="pt-24">
       {/* Hero */}
       <section className="section-padding relative overflow-hidden hero-bg">
+        <VideoBackground
+          localSrc="/videos/library.mp4"
+          fallbackSrc="https://images.pexels.com/video-files/3760070/3760070-hd_1920_1080_24fps.mp4"
+          overlayOpacity={0.6}
+        />
         <div className="orb orb-gold w-[500px] h-[500px] top-0 -right-40 opacity-15" />
         <div className="container-custom relative z-10 text-center">
           <motion.div

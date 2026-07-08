@@ -4,27 +4,61 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 
+import { CINEMATIC_LIBRARY } from '../../constants/videoLibrary';
+
 const ScalesScene = lazy(() => import('../3d/ScalesScene'));
 const ParticleField = lazy(() => import('../3d/ParticleField'));
 
-const BACKGROUND_VIDEOS = [
-  'https://images.pexels.com/video-files/3760067/3760067-hd_1920_1080_24fps.mp4', // Lawyer writing, gavel and law books in background
-  'https://images.pexels.com/video-files/4490807/4490807-hd_1920_1080_24fps.mp4', // Close up of lawyer reviewing contract
-  'https://images.pexels.com/video-files/5607908/5607908-hd_1920_1080_24fps.mp4'  // Courtroom scales, gavel, and books
-];
-
 export default function HeroSection() {
-  const [videoIndex, setVideoIndex] = useState(0);
+  const [videoIndex, setVideoIndex] = useState(() => Math.floor(Math.random() * CINEMATIC_LIBRARY.length));
+  const [nextVideoIndex, setNextVideoIndex] = useState(() => {
+    const startIdx = Math.floor(Math.random() * CINEMATIC_LIBRARY.length);
+    // Find a different starting index if possible
+    if (CINEMATIC_LIBRARY.length > 1) {
+      let idx = Math.floor(Math.random() * CINEMATIC_LIBRARY.length);
+      while (idx === startIdx) {
+        idx = Math.floor(Math.random() * CINEMATIC_LIBRARY.length);
+      }
+      return idx;
+    }
+    return startIdx;
+  });
+  const [failedIndices, setFailedIndices] = useState<Set<number>>(() => new Set());
+
   const titleRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
 
+  // Helper to resolve source URL (checks if local path has failed)
+  const getVideoSrc = (idx: number) => {
+    const scene = CINEMATIC_LIBRARY[idx];
+    return failedIndices.has(idx) ? scene.fallbackUrl : scene.localUrl;
+  };
+
+  const handleVideoError = (idx: number) => {
+    console.warn(`Local video failed for index ${idx}. Falling back to CDN.`);
+    setFailedIndices((prev) => {
+      const updated = new Set(prev);
+      updated.add(idx);
+      return updated;
+    });
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setVideoIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_VIDEOS.length);
-    }, 10000); // Change video every 10 seconds
+      setVideoIndex(nextVideoIndex);
+      // Select the subsequent video index to preload next
+      setNextVideoIndex((currentNext) => {
+        if (CINEMATIC_LIBRARY.length <= 1) return currentNext;
+        let newNext = Math.floor(Math.random() * CINEMATIC_LIBRARY.length);
+        while (newNext === currentNext) {
+          newNext = Math.floor(Math.random() * CINEMATIC_LIBRARY.length);
+        }
+        return newNext;
+      });
+    }, 10000); // Transition every 10 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [nextVideoIndex]);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -45,22 +79,37 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <AnimatePresence initial={false}>
           <motion.video
-            key={BACKGROUND_VIDEOS[videoIndex]}
-            src={BACKGROUND_VIDEOS[videoIndex]}
+            key={videoIndex}
+            src={getVideoSrc(videoIndex)}
             autoPlay
             muted
-            loop
             playsInline
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.18 }} // Subtle overlay so text reads perfectly
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => handleVideoError(videoIndex)}
+            initial={{ opacity: 0, scale: 1.0, zIndex: 0 }}
+            animate={{ opacity: 0.35, scale: 1.06, zIndex: 0 }} // Smooth Ken Burns zoom to 1.06
+            exit={{ opacity: 0, zIndex: 10 }} // Exiting video fades out ON TOP of the pre-playing next video
+            transition={{
+              opacity: { duration: 1.2, ease: 'easeInOut' },
+              scale: { duration: 10, ease: 'linear' } // Zoom is slow and linear over the clip duration
+            }}
+            className="absolute inset-0 w-full h-full object-cover origin-center"
           />
         </AnimatePresence>
-        {/* Navy/Gold blend overlay gradients for rich contrast */}
-        <div className="absolute inset-0 bg-navy-950/40 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-transparent to-navy-950 opacity-90" />
+
+        {/* Background Preloader for Next Video (Hidden) */}
+        <video
+          key={`preload-${nextVideoIndex}`}
+          src={getVideoSrc(nextVideoIndex)}
+          preload="auto"
+          muted
+          playsInline
+          onError={() => handleVideoError(nextVideoIndex)}
+          className="hidden"
+        />
+
+        {/* Premium Dark Overlay (60% opacity) for outstanding text legibility */}
+        <div className="absolute inset-0 bg-navy-950/60 mix-blend-multiply" style={{ zIndex: 11 }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-transparent to-navy-950 opacity-90" style={{ zIndex: 11 }} />
       </div>
       {/* Particle system */}
       <Suspense fallback={null}>
@@ -212,12 +261,41 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
+      {/* Cinematic Scene Indicator & Controls */}
+      <div className="absolute bottom-6 left-6 right-6 md:right-auto z-20 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 glass-gold rounded-2xl md:rounded-full px-5 py-3 border border-gold-500/20 text-xs max-w-sm sm:max-w-none">
+        <span className="text-gold-400 font-serif tracking-wider font-semibold whitespace-nowrap">
+          Scene {String(videoIndex + 1).padStart(2, '0')} / 15
+        </span>
+        <div className="hidden sm:block w-px h-3 bg-white/20" />
+        <div className="flex flex-col">
+          <span className="text-white font-medium font-serif leading-tight">
+            {CINEMATIC_LIBRARY[videoIndex].title}
+          </span>
+          <span className="text-white/40 text-[10px] uppercase tracking-wider mt-0.5">
+            Category: {CINEMATIC_LIBRARY[videoIndex].category}
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-1.5 mt-2 sm:mt-0 sm:ml-4">
+          {CINEMATIC_LIBRARY.map((scene, idx) => (
+            <button
+              key={scene.id}
+              onClick={() => setVideoIndex(idx)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                idx === videoIndex ? 'bg-gold-400 scale-125 glow-gold' : 'bg-white/20 hover:bg-white/50'
+              }`}
+              title={scene.title}
+              aria-label={`Go to scene ${scene.id}`}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Scroll hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 pointer-events-none hidden md:flex"
       >
         <span className="text-xs tracking-widest uppercase font-sans">Scroll</span>
         <motion.div
