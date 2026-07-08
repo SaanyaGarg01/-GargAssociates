@@ -1,35 +1,30 @@
-import { motion } from 'framer-motion';
-
+// Lady Justice image card — shown in the right side of the Hero section
 export default function ScalesScene({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-6 md:p-8 overflow-hidden select-none">
-      {/* Background glow orbs for depth */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gold-500/8 blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 left-1/3 w-32 h-32 rounded-full bg-blue-500/5 blur-3xl pointer-events-none" />
-      
-      {/* Lady Justice Image with premium floating animation */}
-      <motion.div
-        animate={{
-          y: [0, -12, 0],
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden select-none">
+      {/* Lady Justice photograph — fills the rounded card */}
+      <img
+        src="/lady_justice.png"
+        alt="Lady Justice holding the Scales of Justice"
+        className="w-full h-full object-cover object-center"
+        draggable={false}
+      />
+      {/* Subtle premium dark vignette overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, rgba(3,6,21,0.55) 100%)',
         }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
+      />
+      {/* Gold shimmer gradient at the bottom for card depth */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(3,6,21,0.80) 0%, transparent 100%)',
         }}
-        className="relative w-full h-full flex items-center justify-center"
-      >
-        <img
-          src="/lady_justice.png"
-          alt="Lady of Justice holding the scales of justice"
-          className={`w-full h-full object-contain filter drop-shadow-[0_15px_30px_rgba(201,168,76,0.18)] transition-all duration-500 ${
-            compact ? 'max-h-[280px]' : 'max-h-[480px] lg:max-h-[560px]'
-          }`}
-        />
-        
-        {/* Subtle decorative blend gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/10 via-transparent to-transparent pointer-events-none" />
-      </motion.div>
+      />
     </div>
   );
 }

@@ -43,8 +43,9 @@ export default function VideoBackground({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            video.muted = true;
             video.play().catch((err) => {
-              console.log('Autoplay blocked or paused:', err);
+              console.warn('Autoplay failed or was prevented:', err);
             });
           } else {
             video.pause();
@@ -86,6 +87,7 @@ export default function VideoBackground({
       >
         {/* Inner motion wrapper to handle the Ken Burns scale animation */}
         <motion.video
+          key={source}
           ref={videoRef}
           src={source}
           autoPlay
@@ -94,6 +96,7 @@ export default function VideoBackground({
           playsInline
           preload="auto"
           onError={handleVideoError}
+          onCanPlay={(e) => { e.currentTarget.muted = true; }}
           animate={{ scale: [1, 1.06] }}
           transition={{
             duration: 20,
