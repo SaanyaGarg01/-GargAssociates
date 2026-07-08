@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, ArrowRight, BookOpen, Tag } from 'lucide-react';
 import { blogPosts } from '../data';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import CTASection from '../components/sections/CTASection';
+import VideoBackground from '../components/ui/VideoBackground';
 
 const categories = ['All', 'Corporate Law', 'Cyber Law', 'Family Law', 'Property Law', 'Criminal Law'];
 
 export default function Blog() {
   const [filter, setFilter] = useState('All');
+  const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
   const progress = useScrollProgress();
 
   useEffect(() => {
@@ -29,6 +31,11 @@ export default function Blog() {
 
       {/* Hero */}
       <section className="section-padding relative overflow-hidden hero-bg">
+        <VideoBackground
+          localSrc="/videos/library.mp4"
+          fallbackSrc="https://images.pexels.com/video-files/3760070/3760070-hd_1920_1080_24fps.mp4"
+          overlayOpacity={0.6}
+        />
         <div className="orb orb-blue w-[400px] h-[400px] -top-20 -left-20 opacity-15" />
         <div className="container-custom relative z-10 text-center">
           <motion.div
@@ -94,7 +101,7 @@ export default function Blog() {
                       <div className="text-white/30 text-xs">Founding Partner</div>
                     </div>
                   </div>
-                  <button className="btn-outline text-xs px-5 py-2.5">
+                  <button onClick={() => setSelectedPost(featured)} className="btn-outline text-xs px-5 py-2.5">
                     <span>Read Full Article</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
@@ -137,6 +144,7 @@ export default function Blog() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.6 }}
+                onClick={() => setSelectedPost(post)}
                 className="glass rounded-2xl overflow-hidden border border-white/5 hover:border-gold-500/25 group card-hover cursor-pointer"
               >
                 {/* Color bar */}
@@ -168,6 +176,57 @@ export default function Blog() {
           </div>
         </div>
       </section>
+
+      {/* Article Detail Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPost(null)}
+              className="absolute inset-0 bg-navy-950/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto glass-gold rounded-3xl p-8 border border-gold-500/25 z-10 flex flex-col"
+            >
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="absolute top-6 right-6 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all duration-300"
+              >
+                ✕
+              </button>
+              <div className="flex flex-wrap items-center gap-3 mb-4 text-xs">
+                <span className="tag">{selectedPost.category}</span>
+                <span className="text-gold-400">{selectedPost.date}</span>
+                <span className="text-white/40">{selectedPost.readTime}</span>
+              </div>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-white mb-6 leading-snug pr-8">
+                {selectedPost.title}
+              </h2>
+              <div className="text-white/70 text-sm md:text-base leading-relaxed space-y-5 pr-2 mb-8">
+                {selectedPost.content?.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+              <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center font-serif font-bold text-navy-950 text-sm">
+                  {selectedPost.author.split(' ').map((n) => n[0]).join('')}
+                </div>
+                <div>
+                  <div className="text-white text-sm font-semibold">{selectedPost.author}</div>
+                  <div className="text-white/30 text-xs">Author & Partner</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <CTASection />
     </main>

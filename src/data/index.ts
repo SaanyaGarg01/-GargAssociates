@@ -214,6 +214,9 @@ export const blogPosts = [
     category: 'Corporate Law',
     title: 'The New Face of M&A Law in India: What Every Business Leader Must Know in 2026',
     excerpt: 'India\'s merger and acquisition landscape has undergone seismic shifts. From SEBI\'s updated takeover code to NCLT procedural reforms, we break down what matters.',
+    content: `The Indian merger and acquisition (M&A) landscape in 2026 has witnessed unprecedented regulatory adjustments. The Securities and Exchange Board of India (SEBI) recently enacted a revised Takeover Code, aimed at streamlining control premiums and enhancing minority shareholder rights during corporate restructuring. Concurrently, the National Company Law Tribunal (NCLT) has instituted new procedural fast-tracks for corporate reorganizations, successfully shortening the average approval cycle from 12 months to less than 6 months.
+
+For corporate directors and business leaders, understanding these new statutory pathways is critical. Key highlights include the expansion of "fast-track" mergers under Section 233 of the Companies Act to cover a wider class of startups and small companies, as well as the new compliance mandates on digital data sovereignty during cross-border restructurings. We advise companies planning restructurings in 2026 to engage in thorough pre-filing compliance checks to avoid procedural holdups.`,
     readTime: '8 min read',
     date: 'May 20, 2026',
     author: 'Adv. Sudhir Garg',
@@ -226,6 +229,15 @@ export const blogPosts = [
     category: 'Cyber Law',
     title: 'DPDP Act 2023: Your Business Compliance Guide for 2026',
     excerpt: 'The Digital Personal Data Protection Act is now in full force. Here\'s a comprehensive compliance checklist every Indian business needs to follow.',
+    content: `As of 2026, the transitionary phase for the Digital Personal Data Protection (DPDP) Act has concluded, and the Data Protection Board of India (DPBI) has commenced active enforcement and auditing. Organizations operating in India must align their data governance practices with the new statutory mandates or risk severe financial liabilities.
+
+In this guide, we outline the fundamental pillars of compliance that every corporate entity must satisfy:
+1. Appointing a designated Data Protection Officer (DPO) to oversee data processing operations.
+2. Establishing a clear, unambiguous consent architecture for all user-facing digital platforms.
+3. Mapping data ingestion flows and verifying that data is only retained for specified, legitimate purposes.
+4. Developing a robust security breach response mechanism to report data breaches to the DPBI within the mandatory window.
+
+Penalties for non-compliance can reach up to ₹250 crore, making immediate legal alignment a necessity rather than an option.`,
     readTime: '6 min read',
     date: 'May 14, 2026',
     author: 'Adv. Namita Garg',
@@ -238,6 +250,9 @@ export const blogPosts = [
     category: 'Family Law',
     title: 'Child Custody in the Digital Age: Social Media Evidence and Its Impact',
     excerpt: 'How courts are now treating WhatsApp chats, Instagram posts, and email evidence in child custody disputes — and what parents must know.',
+    content: `The adjudication of child custody cases in Indian family courts has evolved rapidly with the digitisation of personal lives. In 2026, social media postings, WhatsApp conversations, and email records are frequently presented by litigating spouses to establish parental fitness, lifestyle stability, and domestic environments.
+
+Courts are increasingly willing to analyze digital footprints to assess a parent's daily involvement, emotional state, and communicative patterns. However, the admissibility of such evidence is heavily governed by Section 65B of the Indian Evidence Act. Advocates must be highly precise when presenting digital metadata, ensuring chains of custody and certified forensic copies are maintained to prevent rejection. We advise clients to exercise extreme caution regarding their social media presence during active matrimonial litigation.`,
     readTime: '5 min read',
     date: 'May 8, 2026',
     author: 'Adv. Namita Garg',
@@ -250,6 +265,9 @@ export const blogPosts = [
     category: 'Property Law',
     title: 'RERA 2026 Updates: New Protections for Homebuyers You Must Leverage',
     excerpt: 'Recent RERA amendments provide unprecedented protection to homebuyers. Understanding your rights under the new framework could save lakhs.',
+    content: `Recent judicial rulings and RERA amendments in 2026 have significantly bolstered protections for homebuyers. Key changes include strict enforcement of escrow account rules: developers must deposit 70% of all client receipts in dedicated project accounts, and withdrawals are strictly gated by architectural certification.
+
+Furthermore, the interest rates for delayed project handovers have been pegged to a standardized benchmark (SBI MCLR + 2%), providing uniform relief to buyers. The RERA appellate tribunals have also been granted expanded powers to attach developer assets in cases of willful non-compliance. Homebuyers facing possession delays should leverage these updated legal provisions to secure quick mediation or asset recovery.`,
     readTime: '7 min read',
     date: 'April 29, 2026',
     author: 'Adv. Sudhir Garg',
@@ -262,6 +280,9 @@ export const blogPosts = [
     category: 'Criminal Law',
     title: 'Anticipatory Bail: Strategic Timing and the Decisive Factors Courts Consider',
     excerpt: 'A deep dive into how anticipatory bail applications are evaluated — and the strategic windows that make the difference between success and rejection.',
+    content: `Anticipatory bail is one of the most critical safeguards under Section 438 of the CrPC (now section 482 of the BNSS). In high-profile criminal litigation, securing anticipatory bail requires establishing a strong prima facie case of false implication or personal malice.
+
+The Supreme Court of India has reiterated that courts must balance the personal liberty of the accused with the integrity of the state's investigation. Factors such as the nature and gravity of the accusation, the clean background of the applicant, and the likelihood of the applicant fleeing justice are heavily weighted. The strategic window for filing an anticipatory bail application is immediately upon learning of a pending FIR or reasonable apprehension of arrest.`,
     readTime: '9 min read',
     date: 'April 22, 2026',
     author: 'Adv. Sudhir Garg',

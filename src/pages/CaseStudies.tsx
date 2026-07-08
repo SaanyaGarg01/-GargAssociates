@@ -4,6 +4,7 @@ import { ArrowRight, Clock, Target, Trophy } from 'lucide-react';
 import { caseStudies } from '../data';
 import CTASection from '../components/sections/CTASection';
 import { Link } from 'react-router-dom';
+import VideoBackground from '../components/ui/VideoBackground';
 
 export default function CaseStudies() {
   useEffect(() => {
@@ -14,6 +15,11 @@ export default function CaseStudies() {
     <main className="pt-24">
       {/* Hero */}
       <section className="section-padding relative overflow-hidden hero-bg">
+        <VideoBackground
+          localSrc="/videos/courtroom.mp4"
+          fallbackSrc="https://images.pexels.com/video-files/5607873/5607873-hd_1920_1080_24fps.mp4"
+          overlayOpacity={0.6}
+        />
         <div className="orb orb-gold w-[400px] h-[400px] -top-20 left-1/4 opacity-15" />
         <div className="container-custom relative z-10 text-center">
           <motion.div
